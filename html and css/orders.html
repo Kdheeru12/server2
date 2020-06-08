@@ -1,0 +1,168 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders</title>
+   <style>
+    *,
+    *::before,
+    *::after{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    html{
+        font-size: 10px;
+        font-family: 'Roboto','san-serif';
+    }
+    img{
+        width: 100%;
+    }
+    body{
+        width: 100%;
+        height:80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color:#eee;
+        padding:0 1.5rem ;
+    }
+    .blog-post{
+        width: 100%;
+        max-width: 98rem;
+        padding: 5rem;
+        background:linear-gradient(135deg,rgb(400, 72, 50,.9) 10%,rgb(241, 171, 40)
+        100%);
+        box-shadow: 0 1.4rem 8rem rgba(0,0,0,.2);
+        display: flex;
+        align-items: center;
+        border-radius: .8rem;
+    
+    }
+    .blog-post_img{
+        min-width: 40rem;
+        max-width: 40rem;
+        height: 40rem;
+        transform: translateX(-7rem);
+        position: relative;
+    }
+    .blog-post_img img{
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        border:.15rem solid orange;
+        border-radius: 3rem;
+    }
+    .blog-post_img::before{
+        content: '';
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        box-shadow: .2rem .2rem 1px 1px orange;
+        border-radius: 3rem;
+    }
+    
+    .blog-post_date span{
+        display: block;
+        font-size: 30px;
+        font-weight: 300;
+        margin: .5rem 0;
+        color: ghostwhite;
+    }
+    .blog-post_title{
+        font-size: 40px;
+        margin: .5rem 0 2rem;
+        text-transform: capitalize;
+        color: ghostwhite;
+    }
+    .blog-post_text{
+        margin-bottom: 3rem;
+        font-size: 2rem;
+        text-transform: uppercase;
+        color: ghostwhite;
+    }
+    .blog-post_cta{
+        display: inline-block;
+        padding: 1.5rem 3rem;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 1.2rem;
+        color: ghostwhite;
+        text-decoration: none;
+        border-radius: .8rem;
+    }
+    .class{
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(55rem,1fr));
+        grid-gap:5rem;
+        height: 40vh;
+    }
+    @media screen and (max-width:1064px){
+        .blog-post{
+            max-width: 80rem;
+        }
+        
+    }
+    @media screen and (max-width:868px){
+        .blog-post{
+            max-width: 70rem;
+        }
+    }  
+    @media screen and (max-width:768px){
+        .blog-post{
+            padding: 2.5rem;
+            flex-direction: column;
+        }
+        .blog-post_img{
+            min-width: 33rem;
+            max-width: 33rem;
+            height: 33rem;
+            transform: translate(0,-7rem);
+        }
+        body{
+            height: 110vh;
+        }
+        .post{
+            transform: translate(2rem);
+        }
+    }
+   </style>
+</head>
+<body>
+    <div class="class">
+        {%for Orders  in orders %}
+        <div class="blog-post">
+            <div class="blog-post_img">
+                <img src="{{Orders.ordered}}" alt="">
+            </div>
+            <div class="blog-post_info">
+                <div class="post">
+                    <div class="blog-post_date">
+                        <span>{{Orders.date}}</span>
+                        <span>asdfs</span>
+                    </div>
+                    <h1 class="blog-post_title">{{Orders.name}}</h1>
+                    <p class="blog-post_text"> 
+                        {{Orders.phonenumber}}
+                        {{Orders.address}}
+                        {% if Orders.order_status%}
+                        ORDER_STATUS:ACCEPTED
+                        {% else %}
+                        ORDER_STATUS:PENDING/CANCELLED
+                        {% endif %}
+                    </p>
+                    <a href="#" class="blog-post_cta">read more</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+
+</body>
+</html>
